@@ -38,6 +38,10 @@ namespace TestingNamespace
             graphics.ApplyChanges();
             Window.Title = "Testing the Wormhole Wrapper";
 
+            //Initialize the static classes:
+            ObjectHolder.Initialize();
+            KeyboardManager.Initialize();
+
             base.Initialize();
         }
 
@@ -48,6 +52,11 @@ namespace TestingNamespace
             GameInfo.RefDevice = Device;
             GameInfo.RefDeviceManager = graphics;
             GameInfo.RefContent = Content;
+
+            //Initialize some more static classes:
+            TextureHolder.Initialize();
+            SoundHolder.Initialize();
+            MouseManager.Initialize();
         }
 
         protected override void UnloadContent()
@@ -57,6 +66,7 @@ namespace TestingNamespace
         protected override void Update(GameTime gameTime)
         {
             Events.RiseUpdate();
+            Events.RiseUpdateEnded();
             base.Update(gameTime);
         }
 

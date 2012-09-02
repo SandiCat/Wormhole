@@ -20,7 +20,7 @@ namespace Wormhole
             {
                 if (obj.Sprite.GetRectangle().Intersects(obj2.Sprite.GetRectangle())) //check if rectangles collide
                 {
-                    if (IntersectPixels(obj.Sprite, obj2.Sprite)) //check pixel collision
+                    if (IsCollidingUnoptimized(obj.Sprite, obj2.Sprite)) //check pixel collision
                     {
                         return true;
                     }
@@ -58,7 +58,7 @@ namespace Wormhole
             }
         }
 
-        private static bool IntersectPixels(Sprite spriteA, Sprite spriteB)
+        public static bool IsCollidingUnoptimized(Sprite spriteA, Sprite spriteB)
         {
             Matrix transformA = spriteA.GetMatrix();
             Matrix transformB = spriteB.GetMatrix();

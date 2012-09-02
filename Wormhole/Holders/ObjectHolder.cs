@@ -14,7 +14,7 @@ namespace Wormhole
 {
     public static class ObjectHolder
     {
-        public static List<GameObject> Objects { public get; private set; }
+        public static List<GameObject> Objects { get; private set; }
 
         public static void Initialize() //since this is a static object
         {

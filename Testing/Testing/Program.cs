@@ -1,8 +1,7 @@
 using System;
 
-namespace Testing
+namespace TestingNamespace
 {
-#if WINDOWS || XBOX
     static class Program
     {
         /// <summary>
@@ -10,12 +9,11 @@ namespace Testing
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (Testing game = new Testing())
             {
                 game.Run();
             }
         }
     }
-#endif
 }
 

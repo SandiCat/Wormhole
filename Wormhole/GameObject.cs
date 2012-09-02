@@ -21,7 +21,7 @@ namespace Wormhole
             Events.Update += new Events.NoArgsDelegate(Update);
         }
 
-        public abstract void Update();
+        protected abstract void Update();
 
         public void Detach()
         {
@@ -39,6 +39,29 @@ namespace Wormhole
             {
                 return false;
             }
+        }
+
+        //Some basic common actions an object can do:
+        public void StepTowards(Vector2 point, float distance)
+        {
+            point.Normalize();
+            Sprite.Position += point * distance;
+        }
+        public void StepAngle(float angle, float distance)
+        {
+            Vector2 up = new Vector2(0, -1);
+            Matrix rotationMat = Matrix.CreateRotationZ(angle);
+            Vector2 direction = Vector2.Transform(up, rotationMat);
+
+            Sprite.Position += direction * distance;
+        }
+        public void ChangeObject(Type type)
+        {
+            ObjectHolder.Delete(this);
+
+            GameObject newObject = ObjectHolder.NewOfType(type, Sprite.Position);
+            ObjectHolder.Create(newObject);
+            newObject.Sprite.Origin = Sprite.Origin;
         }
     }
 }

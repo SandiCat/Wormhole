@@ -14,7 +14,7 @@ namespace Wormhole
 {
     public static class WindowChecks
     {
-        public bool IsIntersecting(this GameObject obj)
+        public static bool IsIntersecting(this GameObject obj)
         {
             Rectangle screenRectangle = GameInfo.RefDevice.Viewport.Bounds;
             if (screenRectangle.Intersects(obj.Sprite.GetRectangle())
@@ -27,7 +27,7 @@ namespace Wormhole
                 return false;
             }
         }
-        public bool IsOutsideWindow(this GameObject obj)
+        public static bool IsOutsideWindow(this GameObject obj)
         {
             Rectangle screenRectangle = GameInfo.RefDevice.Viewport.Bounds;
             if (!screenRectangle.Contains(obj.Sprite.GetRectangle()) && !IsIntersecting(obj))

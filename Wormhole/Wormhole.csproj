@@ -92,6 +92,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm.cs" />
     <Compile Include="Checks\CollisionChecks.cs" />
     <Compile Include="Checks\WindowChecks.cs" />
     <Compile Include="Directions.cs" />
@@ -99,11 +100,13 @@
     <Compile Include="GameInfo.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Grid\Grid.cs" />
-    <Compile Include="Managers\SoundHolder.cs" />
-    <Compile Include="Managers\ObjectHolder.cs" />
+    <Compile Include="Holders\SoundHolder.cs" />
+    <Compile Include="Holders\ObjectHolder.cs" />
+    <Compile Include="InputManagers\MouseManager.cs" />
+    <Compile Include="InputManagers\KeyboardManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprite.cs" />
-    <Compile Include="Managers\TextureHolder.cs" />
+    <Compile Include="Holders\TextureHolder.cs" />
     <Compile Include="Grid\TileObjectCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
