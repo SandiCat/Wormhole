@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alarm.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="Checks\CollisionChecks.cs" />
     <Compile Include="Checks\WindowChecks.cs" />
     <Compile Include="Directions.cs" />

@@ -38,11 +38,13 @@ namespace Wormhole
             Image = image;
 
             Position = position;
+
+            Events.Draw += new Events.NoArgsDelegate(Draw);
         }
 
         public void Draw()
         {
-            GameInfo.RefSpriteBatch.Draw(Image, Position, null, Color, Rotation, Origin, Scale, SpriteEffects.None, 0.0f);
+            GameInfo.RefSpriteBatch.Draw(Image, Position - Camera.Position, null, Color, Rotation, Origin, Scale, SpriteEffects.None, 0.0f);
         }
 
         public Matrix GetMatrix()

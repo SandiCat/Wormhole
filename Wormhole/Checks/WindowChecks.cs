@@ -39,5 +39,14 @@ namespace Wormhole
                 return false;
             }
         }
+
+        public static int Width()
+        {
+            return GameInfo.RefDevice.Viewport.Width;
+        }
+        public static int Height()
+        {
+            return GameInfo.RefDevice.Viewport.Height;
+        }
     }
 }

@@ -25,10 +25,6 @@ namespace Wormhole
             DefaultTextures = new Dictionary<Type, Texture2D>();
 
             EmptyTexture = new Texture2D(GameInfo.RefDevice, 1, 1);
-
-            //Make a mouse texture
-            TextureHolder.Textures.Add("Mouse", new Texture2D(GameInfo.RefDevice, 1, 1));
-            TextureHolder.Textures["Mouse"].SetData(new Color[] { Color.Black });
         }
         public static Texture2D AddTexture(string filename)
         {

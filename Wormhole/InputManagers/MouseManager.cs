@@ -17,19 +17,19 @@ namespace Wormhole
         static private MouseState _previousMouseState;
         static public MouseState CurrentMouseState { get; private set; }
 
-        static Texture2D _texture;
-        static Vector2 _position;
-        static Sprite _sprite;
+        static private Texture2D _texture;
+        static private Vector2 _position;
 
         static public void Initialize()
         {
             Events.Update += new Events.NoArgsDelegate(Update);
             Events.UpdateEnded += new Events.NoArgsDelegate(UpdateEnded);
-
+            
             _previousMouseState = new MouseState();
             CurrentMouseState = new MouseState();
- 
-            Texture2D _texture = TextureHolder.Textures["Mouse"];
+
+            _texture = new Texture2D(GameInfo.RefDevice, 1, 1);
+            _texture.SetData(new Color[] { Color.Black });
         }
 
         static private void Update()
@@ -38,7 +38,7 @@ namespace Wormhole
             CurrentMouseState = Mouse.GetState();
 
             //Adjuts position:
-            Vector2 _position = new Vector2(CurrentMouseState.X, CurrentMouseState.Y);
+            _position = new Vector2(CurrentMouseState.X, CurrentMouseState.Y);
         }
         static private void UpdateEnded()
         {
@@ -53,6 +53,7 @@ namespace Wormhole
             Sprite point = new Sprite(_texture, _position);
             point.Scale = obj.Sprite.Scale;
             point.Rotation = obj.Sprite.Rotation;
+            point.Detach(); //So its not drawn
 
             if (obj.Sprite.GetRectangle().Intersects(point.GetRectangle()))
             {
@@ -86,6 +87,7 @@ namespace Wormhole
             Sprite point = new Sprite(_texture, _position);
             point.Scale = obj.Sprite.Scale;
             point.Rotation = obj.Sprite.Rotation;
+            point.Detach(); //So its not drawn
 
             if (obj.Sprite.GetRectangle().Intersects(point.GetRectangle()))
             {
@@ -119,6 +121,7 @@ namespace Wormhole
             Sprite point = new Sprite(_texture, _position);
             point.Scale = obj.Sprite.Scale;
             point.Rotation = obj.Sprite.Rotation;
+            point.Detach(); //So its not drawn
 
             if (obj.Sprite.GetRectangle().Intersects(point.GetRectangle()))
             {

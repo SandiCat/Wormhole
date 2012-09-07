@@ -37,6 +37,7 @@ namespace TestingNamespace
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "Testing the Wormhole Wrapper";
+            IsMouseVisible = true;
 
             //Initialize the static classes:
             ObjectHolder.Initialize();
@@ -57,6 +58,12 @@ namespace TestingNamespace
             TextureHolder.Initialize();
             SoundHolder.Initialize();
             MouseManager.Initialize();
+
+            //Initialize default sprites:
+            TextureHolder.DefaultTextures[typeof(BlueObject)] = TextureHolder.AddTexture("BlueSquare");
+
+            //Create the objects:
+            ObjectHolder.Create(new BlueObject(new Vector2(0, 20)));
         }
 
         protected override void UnloadContent()
@@ -72,7 +79,7 @@ namespace TestingNamespace
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.ForestGreen);
 
             spriteBatch.Begin();
             Events.RiseDraw();
