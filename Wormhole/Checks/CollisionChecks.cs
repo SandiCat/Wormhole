@@ -39,6 +39,21 @@ namespace Wormhole
                 return false;
             }
         }
+        public static bool IsColliding(this GameObject obj, Type type)
+        {
+            bool isColliding = false;
+
+            foreach (var obj2 in ObjectHolder.Objects.Where((x) => x.GetType() == type))
+            {
+                if (IsColliding(obj, obj2))
+                {
+                    isColliding = true;
+                    break;
+                }
+            }
+
+            return isColliding;
+        }
         public static bool IsRectangleColliding(this GameObject obj, GameObject obj2)
         {
             if (obj != obj2) // dont check collisions with yourself
