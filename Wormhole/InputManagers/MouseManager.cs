@@ -147,5 +147,34 @@ namespace Wormhole
                 return false;
             }
         }
+
+        static public bool Click()
+        {
+            if (CurrentMouseState.LeftButton == ButtonState.Pressed
+                        && _previousMouseState.LeftButton == ButtonState.Released)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        static public bool RightClick()
+        {
+            if (CurrentMouseState.RightButton == ButtonState.Pressed
+                        && _previousMouseState.RightButton == ButtonState.Released)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        static public Vector2 Position()
+        {
+            return new Vector2(CurrentMouseState.X, CurrentMouseState.Y);
+        }
     }
 }
