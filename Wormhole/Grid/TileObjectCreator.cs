@@ -27,7 +27,9 @@ namespace Wormhole
                 {
                     if (discription[character] != null)
                     {
-                        ObjectHolder.Create(ObjectHolder.NewOfType(discription[character], new Vector2(x, y)));
+                        GameObject obj = ObjectHolder.NewOfType(discription[character], new Vector2(x, y));
+                        obj.Sprite.Position += obj.Sprite.Origin;
+                        ObjectHolder.Create(obj);
                     }
                     x += elementWidth;
                 }
