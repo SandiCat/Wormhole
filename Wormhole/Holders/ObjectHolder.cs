@@ -24,6 +24,7 @@ namespace Wormhole
         public static void Create(GameObject obj)
         {
             Objects.Add(obj);
+            obj.Attach();
         }
         public static void Delete(GameObject obj)
         {

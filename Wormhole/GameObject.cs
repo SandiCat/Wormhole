@@ -18,8 +18,6 @@ namespace Wormhole
 
         public GameObject()
         {
-            Events.Update += new Events.NoArgsDelegate(Update);
-
             try
             {
                 Sprite = new Sprite(TextureHolder.DefaultTextures[this.GetType()], new Vector2(0, 0));
@@ -31,7 +29,6 @@ namespace Wormhole
         }
         public GameObject(Vector2 position)
         {
-            Events.Update += new Events.NoArgsDelegate(Update);
             try
             {
                 Sprite = new Sprite(TextureHolder.DefaultTextures[this.GetType()], position);
@@ -44,6 +41,11 @@ namespace Wormhole
 
         protected abstract void Update();
 
+        public void Attach()
+        {
+            Events.Update += new Events.NoArgsDelegate(Update);
+            Sprite.Attach();
+        }
         public void Detach()
         {
             Events.Update -= new Events.NoArgsDelegate(Update);

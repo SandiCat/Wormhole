@@ -30,16 +30,12 @@ namespace Wormhole
             Rotation = roatation;
             Position = position;
             Origin = origin;
-
-            Events.Draw += new Events.NoArgsDelegate(Draw);
         }
         public Sprite(Texture2D image, Vector2 position)
         {
             Image = image;
 
             Position = position;
-
-            Events.Draw += new Events.NoArgsDelegate(Draw);
         }
 
         public void Draw()
@@ -104,6 +100,11 @@ namespace Wormhole
             return Position - Origin;
         }
 
+
+        public void Attach()
+        {
+            Events.Draw += new Events.NoArgsDelegate(Draw);
+        }
         public void Detach()
         {
             Events.Draw -= new Events.NoArgsDelegate(Draw);
