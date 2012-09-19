@@ -14,26 +14,25 @@ using Wormhole;
 
 namespace Wormhole
 {
-    public class Grid : GameObject
+    public class Grid
     {
         public Grid(Vector2 position, int side, int squareSide)
-            : base(position)
         {
             _side = side;
             _squareSide = squareSide;
-            Sprite.Position = position;
+            _position = position;
 
             Objects = new GameObject[_side, _side];
             _positions = new Vector2[_side, _side];
 
             // Calculate square positions:
-            float yPosition = Sprite.Position.Y;
+            float yPosition = _position.Y;
 
             for (int i = 0; i < _side; i++)
             {
                 for (int j = 0; j < _side; j++)
                 {
-                    _positions[i, j] = new Vector2(_squareSide * j + Sprite.Position.X, yPosition);
+                    _positions[i, j] = new Vector2(_squareSide * j + _position.X, yPosition);
                 }
 
                 yPosition += _squareSide;
@@ -43,21 +42,16 @@ namespace Wormhole
 
         public GameObject[,] Objects { get; private set; }
         Vector2[,] _positions;
+        Vector2 _position;
 
         readonly int _side;
         readonly int _squareSide;
 
-        protected override void Update()
+        public GameObject AddObject(int x, int y, GameObject obj)
         {
-            for (int i = 0; i < _side; i++)
-            {
-                for (int j = 0; j < _side; j++)
-                {
-                    GameObject obj = Objects[i, j];
-
-                    if (obj != null) obj.Sprite.Position = _positions[i, j] + obj.Sprite.Origin;
-                }
-            }
+            obj.Sprite.Position = _positions[x, y] + obj.Sprite.Origin;
+            Objects[x, y] = obj;
+            return obj;
         }
 
         public Vector2 GetXY(GameObject obj)
@@ -105,7 +99,7 @@ namespace Wormhole
 
         public Vector2 GetPositionFromXY(int x, int y)
         {
-            return new Vector2(x * _squareSide + Sprite.Position.X, y * _squareSide + Sprite.Position.Y);
+            return new Vector2(x * _squareSide + _position.X, y * _squareSide + _position.Y);
         }
 
         public void CreateFromString(Dictionary<char, Type> discription, params string[] rows)
@@ -120,7 +114,7 @@ namespace Wormhole
                     {
                         GameObject obj = ObjectHolder.NewOfType(discription[character], new Vector2(0, 0));
                         obj.Sprite.Position += obj.Sprite.Origin; //This makes positon the top left corner, not the origin
-                        Objects[i, j] = ObjectHolder.Create(obj);
+                        AddObject(i, j, ObjectHolder.Create(obj));
                     }
                 }
             }
