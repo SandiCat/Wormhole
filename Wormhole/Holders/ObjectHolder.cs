@@ -21,10 +21,11 @@ namespace Wormhole
             Objects = new List<GameObject>();
         }
 
-        public static void Create(GameObject obj)
+        public static GameObject Create(GameObject obj)
         {
             Objects.Add(obj);
             obj.Attach();
+            return obj;
         }
         public static void Delete(GameObject obj)
         {
