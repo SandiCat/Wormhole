@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Wormhole;
 
 
-namespace AI_System
+namespace Wormhole
 {
     public class Grid : GameObject
     {
@@ -21,6 +21,7 @@ namespace AI_System
         {
             _side = side;
             _squareSide = squareSide;
+            Sprite.Position = position;
 
             Objects = new GameObject[_side, _side];
             _positions = new Vector2[_side, _side];
@@ -32,7 +33,7 @@ namespace AI_System
             {
                 for (int j = 0; j < _side; j++)
                 {
-                    _positions[i, j] = new Vector2(yPosition, _squareSide * j + Sprite.Position.X);
+                    _positions[i, j] = new Vector2(_squareSide * j + Sprite.Position.X, yPosition);
                 }
 
                 yPosition += _squareSide;
@@ -52,7 +53,9 @@ namespace AI_System
             {
                 for (int j = 0; j < _side; j++)
                 {
-                    if (Objects[i, j] != null) Objects[i, j].Sprite.Position = _positions[i, j];
+                    GameObject obj = Objects[i, j];
+
+                    if (obj != null) obj.Sprite.Position = _positions[i, j] + obj.Sprite.Origin;
                 }
             }
         }
@@ -107,15 +110,18 @@ namespace AI_System
 
         public void CreateFromString(Dictionary<char, Type> discription, params string[] rows)
         {
-            for (int i = 0; i < rows.GetLength(1); i++)
+            for (int i = 0; i < rows.GetLength(0); i++)
             {
                 for (int j = 0; j < rows[i].Count(); j++)
                 {
                     char character = rows[i][j];
 
-                    GameObject obj = ObjectHolder.NewOfType(discription[character], new Vector2(0, 0));
-                    obj.Sprite.Position += obj.Sprite.Origin; //This makes positon the top left corner, not the origin
-                    Objects[i, j] = ObjectHolder.Create(obj);
+                    if (discription[character] != null)
+                    {
+                        GameObject obj = ObjectHolder.NewOfType(discription[character], new Vector2(0, 0));
+                        obj.Sprite.Position += obj.Sprite.Origin; //This makes positon the top left corner, not the origin
+                        Objects[i, j] = ObjectHolder.Create(obj);
+                    }
                 }
             }
         }
