@@ -102,7 +102,8 @@ namespace Wormhole
             return new Vector2(x * _squareSide + _position.X, y * _squareSide + _position.Y);
         }
 
-        public void CreateFromString(Dictionary<char, Type> discription, params string[] rows)
+        public void CreateFromString(Dictionary<char, Type> typeChars, Dictionary<char, GameObject> objChars, params string[] rows)
+            //There are two char dictionaries, one for objects created from a type, other for already existing objects
         {
             for (int i = 0; i < rows.GetLength(0); i++)
             {
@@ -110,11 +111,13 @@ namespace Wormhole
                 {
                     char character = rows[i][j];
 
-                    if (discription[character] != null)
+                    if (typeChars.ContainsKey(character) && typeChars[character] != null)
                     {
-                        GameObject obj = ObjectHolder.NewOfType(discription[character], new Vector2(0, 0));
-                        obj.Sprite.Position += obj.Sprite.Origin; //This makes positon the top left corner, not the origin
-                        AddObject(i, j, ObjectHolder.Create(obj));
+                        AddObject(i, j, ObjectHolder.Create(ObjectHolder.NewOfType(typeChars[character], new Vector2(0, 0))));
+                    }
+                    else if (objChars.ContainsKey(character) && objChars[character] != null)
+                    {
+                        AddObject(i, j, ObjectHolder.Create(objChars[character]));
                     }
                 }
             }
