@@ -18,16 +18,18 @@ namespace Wormhole
 
         public float Scale = 1.0f;
         public float Rotation = 0.0f;
+        public SpriteEffects Flip = SpriteEffects.None;
         public Color Color = Color.White;
         public Vector2 Position = new Vector2();
         public Vector2 Origin = new Vector2();
 
-        public Sprite(Texture2D image, Vector2 position, Vector2 origin, float roatation, float scale)
+        public Sprite(Texture2D image, Vector2 position, Vector2 origin, float roatation, float scale, SpriteEffects flip)
         {
             Image = image;
 
             Scale = scale;
             Rotation = roatation;
+            Flip = flip;
             Position = position;
             Origin = origin;
         }
@@ -40,7 +42,7 @@ namespace Wormhole
 
         public void Draw()
         {
-            GameInfo.RefSpriteBatch.Draw(Image, Position - Camera.Position, null, Color, Rotation, Origin, Scale, SpriteEffects.None, 0.0f);
+            GameInfo.RefSpriteBatch.Draw(Image, Position - Camera.Position, null, Color, Rotation, Origin, Scale, Flip, 0.0f);
         }
 
         public Matrix GetMatrix()

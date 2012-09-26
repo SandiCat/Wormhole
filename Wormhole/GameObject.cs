@@ -16,6 +16,8 @@ namespace Wormhole
     {
         public Sprite Sprite;
 
+        public bool Solid = true;
+
         public GameObject()
         {
             try
