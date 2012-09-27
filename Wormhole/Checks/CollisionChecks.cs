@@ -16,7 +16,7 @@ namespace Wormhole
     {
         public static bool IsColliding(this GameObject obj, GameObject obj2)
         {
-            if (obj != obj2 && !obj.Solid && !obj2.Solid) // dont check collisions with yourself
+            if (obj != obj2 && obj.Solid && obj2.Solid) // dont check collisions with yourself nor with non solid objects
             {
                 if (obj.Sprite.GetRectangle().Intersects(obj2.Sprite.GetRectangle())) //check if rectangles collide
                 {
@@ -56,7 +56,7 @@ namespace Wormhole
         }
         public static bool IsRectangleColliding(this GameObject obj, GameObject obj2)
         {
-            if (obj != obj2 && !obj.Solid && !obj2.Solid) // dont check collisions with yourself
+            if (obj != obj2 && obj.Solid && obj2.Solid) // dont check collisions with yourself
             {
                 if (obj.Sprite.GetRectangle().Intersects(obj2.Sprite.GetRectangle())) //check if rectangles collide
                 {

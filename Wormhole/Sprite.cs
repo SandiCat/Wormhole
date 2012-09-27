@@ -42,7 +42,8 @@ namespace Wormhole
 
         public void Draw()
         {
-            GameInfo.RefSpriteBatch.Draw(Image, Position - Camera.Position, null, Color, Rotation, Origin, Scale, Flip, 0.0f);
+            if (Image != null)
+                GameInfo.RefSpriteBatch.Draw(Image, Position - Camera.Position, null, Color, Rotation, Origin, Scale, Flip, 0.0f);
         }
 
         public Matrix GetMatrix()
