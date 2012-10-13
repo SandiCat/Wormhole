@@ -14,7 +14,7 @@ using Wormhole;
 
 namespace Wormhole
 {
-    public class Grid
+    public class Grid : GameObject
     {
         public Grid(Vector2 position, int side, int squareSide)
         {
@@ -46,6 +46,26 @@ namespace Wormhole
 
         readonly int _side;
         readonly int _squareSide;
+
+        protected override void Update()
+        {
+            //Remove all objects that have moved from their original position from the Objects array
+            for (int i = 0; i < _side; i++)
+            {
+                for (int j = 0; j < _side; j++)
+                {
+                    var obj = Objects[i, j];
+                    if (obj == null) continue;
+
+                    Vector2 AssingedGridPosition = GetPositionFromXY(i, j);
+
+                    if (AssingedGridPosition != obj.Sprite.Position)
+                    {
+                        Objects[i, j] = null;
+                    }
+                }
+            }
+        }
 
         public GameObject AddObject(int x, int y, GameObject obj)
         {
